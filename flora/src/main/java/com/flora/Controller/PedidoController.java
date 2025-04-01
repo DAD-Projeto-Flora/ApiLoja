@@ -1,0 +1,42 @@
+package com.flora.Controller;
+
+import com.flora.Model.PedidoModel;
+import com.flora.Service.PedidoService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/order")
+public class PedidoController {
+
+    @Autowired
+    private PedidoService pedidoService;
+
+    @PostMapping("/saveOrder")
+    public ResponseEntity<String> saveOrder(@RequestBody PedidoModel pedidoModel){
+        return pedidoService.save(pedidoModel);
+    }
+
+    @GetMapping("/getOrders")
+    public ResponseEntity<List<PedidoModel>> getAllOrders() {
+        return pedidoService.getAll();
+    }
+
+    @GetMapping("/getOrder/{id}")
+    public ResponseEntity<Object> getOrderById(@PathVariable Long id){
+        return pedidoService.getById(id);
+    }
+
+    @PutMapping("/updateOrder/{id}")
+    public ResponseEntity<Object> updateOrder(@PathVariable Long id, @RequestBody PedidoModel pedidoModel){
+        return pedidoService.update(id, pedidoModel);
+    }
+    @DeleteMapping("/deleteOrder/{id}")
+    public ResponseEntity<Object> deleteOrder(@PathVariable Long id){
+        return pedidoService.delete(id);
+    }
+}
+
