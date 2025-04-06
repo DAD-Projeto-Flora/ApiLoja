@@ -47,7 +47,7 @@ public class EnderecoService {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Endereço não encontrado");
             }
             EnderecoModel enderecoToUpdate = (EnderecoModel) endereco.get();
-            enderecoToUpdate.setIdCliente(enderecoModel.getIdCliente());
+            enderecoToUpdate.setCliente(enderecoModel.getCliente());
             enderecoToUpdate.setCep(enderecoModel.getCep());
             enderecoToUpdate.setNumero(enderecoModel.getNumero());
             enderecoToUpdate.setLogradouro(enderecoModel.getLogradouro());

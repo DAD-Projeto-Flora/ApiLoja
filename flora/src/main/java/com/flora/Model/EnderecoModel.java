@@ -33,6 +33,9 @@ public class EnderecoModel {
         this.pontoReferencia = pontoReferencia;
     }
 
+    public EnderecoModel() {
+    }
+
     public Long getId() {
         return id;
     }
