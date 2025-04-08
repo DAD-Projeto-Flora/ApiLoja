@@ -42,11 +42,11 @@ public class ProdutoService {
 
     public ResponseEntity<Object> getByIdCategoria(int idCategoria){
         try {
-            Optional<ProdutoModel> produto = produtoRepository.findBy(idCategoria);
+            List<ProdutoModel> produto = produtoRepository.findByCategoriaId(idCategoria);
             if (produto.isEmpty()){
-                return ResponseEntity.badRequest().body("Esse produto ainda não foi cadastrado.");
+                return ResponseEntity.badRequest().body("Nenhum produto foi cadastrado com essa categoria.");
             }
-            return ResponseEntity.ok(produto.get());
+            return ResponseEntity.ok(produto);
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body("Não foi possível buscaar o produto. Exceção: " + e.getMessage());
         }
@@ -61,7 +61,7 @@ public class ProdutoService {
             ProdutoModel produtoToUpdate = (ProdutoModel) produto.get();
 
             produtoToUpdate.setNome(produtoModel.getNome());
-            produtoToUpdate.setIdCategoria(produtoModel.getIdCategoria());
+            produtoToUpdate.setCategoria(produtoModel.getCategoria());
             produtoToUpdate.setNotaAvaliacao(produtoModel.getNotaAvaliacao());
             produtoToUpdate.setPrecoUnid(produtoModel.getPrecoUnid());
 

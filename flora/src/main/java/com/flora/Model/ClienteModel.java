@@ -9,23 +9,11 @@ public class ClienteModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-
-    @Column(name = "nome_completo", nullable = false)
     String nomeCompleto;
-
-    @Column(nullable = false, unique = true)
     String email;
-
-    @Column(name = "nome_usuario", nullable = false, unique = true)
     String nomeUsuario;
-
-    @Column(name = "foto_perfil", length = 1024)
     String fotoPerfil;
-
-    @Column(nullable = false, length = 30)
     String senha;
-
-    @Column(nullable = false, length = 16)
     String telefone;
 
     public ClienteModel(Long id, String nomeCompleto, String email, String nomeUsuario, String fotoPerfil, String senha, String telefone) {
@@ -96,17 +84,5 @@ public class ClienteModel {
         this.telefone = telefone;
     }
 
-    @Override
-    public String toString() {
-        return "ClienteModel{" +
-                "id=" + id +
-                ", nomeCompleto='" + nomeCompleto + '\'' +
-                ", email='" + email + '\'' +
-                ", nomeUsuario='" + nomeUsuario + '\'' +
-                ", fotoPerfil='" + fotoPerfil + '\'' +
-                ", senha='" + senha + '\'' +
-                ", telefone='" + telefone + '\'' +
-                '}';
-    }
 }
 

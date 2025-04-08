@@ -30,6 +30,11 @@ public class ProdutoController {
         return produtoService.getById(id);
     }
 
+    @GetMapping("/getProductByCategory/{categoryId}")
+    public ResponseEntity<Object> getProductByCategory(@PathVariable int categoryId){
+        return produtoService.getByIdCategoria(categoryId);
+    }
+
     @PutMapping("/updateProduct/{id}")
     public ResponseEntity<Object> updateProduct(@PathVariable Long id, @RequestBody ProdutoModel produtoModel){
         return produtoService.update(id, produtoModel);
