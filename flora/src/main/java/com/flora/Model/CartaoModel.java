@@ -16,7 +16,7 @@ public class CartaoModel {
     @ManyToOne
     private ClienteModel cliente;
     private String numero;
-    private  String cvv;
+    private String cvv;
     private Date validade;
     private String nomeCartao;
     private String apelidoCartao;
