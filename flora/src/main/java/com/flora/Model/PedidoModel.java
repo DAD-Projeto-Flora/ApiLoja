@@ -11,26 +11,12 @@ public class PedidoModel {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pedido_seq")
     private Long id;
-
-    @Column(name = "id_produto", nullable = false)
     private Long idProduto;
-
-    @Column(name = "id_cliente", nullable = false)
     private Long idCliente;
-
-    @Column(name = "data_pedido", nullable = false)
     private Date dataPedido;
-
-    @Column(name="qnt_produto", nullable = false)
     private int qntProduto;
-
-    @Column(name = "forma_pgto", nullable = false)
     private String formaPgto;
-
-    @Column(name = "data_pgto", nullable = false)
     private Date dataPgto;
-
-    @Column(name = "preco_total", nullable = false)
     private double precoTotal;
 
 

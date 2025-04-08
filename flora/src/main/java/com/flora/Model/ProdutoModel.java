@@ -10,21 +10,19 @@ public class ProdutoModel {
     private int id;
     private String nome;
 
-    @Column(name = "preco_unid")
     private double precoUnid;
 
     @JoinColumn(name="id_categoria")
     @ManyToOne
-    private Categoria idCategoria;
+    private CategoriaModel categoria;
 
-    @Column(name = "nota_avaliacao")
     double notaAvaliacao;
 
-    public ProdutoModel(int id, String nome, double precoUnid, int idCategoria, double notaAvaliacao) {
+    public ProdutoModel(int id, String nome, double precoUnid, CategoriaModel categoria, double notaAvaliacao) {
         this.id = id;
         this.nome = nome;
         this.precoUnid = precoUnid;
-        this.idCategoria = idCategoria;
+        this.categoria = categoria;
         this.notaAvaliacao = notaAvaliacao;
     }
 
@@ -55,12 +53,12 @@ public class ProdutoModel {
         this.precoUnid = precoUnid;
     }
 
-    public int getIdCategoria() {
-        return idCategoria;
+    public CategoriaModel getCategoria() {
+        return categoria;
     }
 
-    public void setIdCategoria(int idCategoria) {
-        this.idCategoria = idCategoria;
+    public void setCategoria(CategoriaModel categoria) {
+        this.categoria = categoria;
     }
 
     public double getNotaAvaliacao() {
@@ -69,16 +67,5 @@ public class ProdutoModel {
 
     public void setNotaAvaliacao(double notaAvaliacao) {
         this.notaAvaliacao = notaAvaliacao;
-    }
-
-    @Override
-    public String toString() {
-        return "ProdutoModel{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", precoUnid=" + precoUnid +
-                ", idCategoria=" + idCategoria +
-                ", notaAvaliacao=" + notaAvaliacao +
-                '}';
     }
 }
