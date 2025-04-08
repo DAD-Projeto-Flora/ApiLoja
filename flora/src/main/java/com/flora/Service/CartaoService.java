@@ -47,9 +47,14 @@ public class CartaoService {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cartão não encontrado");
             }
             CartaoModel cartaoToUpdate = (CartaoModel) cartao.get();
-            
+            cartaoToUpdate.setCliente(cartaoModel.getCliente());
+            cartaoToUpdate.setNumero(cartaoModel.getNumero());
+            cartaoToUpdate.setNomeCartao(cartaoToUpdate.getNomeCartao());
+            cartaoToUpdate.setCvv(cartaoToUpdate.getCvv());
+            cartaoToUpdate.setApelidoCartao(cartaoModel.getApelidoCartao());
+            cartaoToUpdate.setValidade(cartaoModel.getValidade());
 
-            
+
             cartaoRepository.save(cartaoToUpdate);
             return ResponseEntity.ok("Cartão atualizado com sucesso!");
         } catch (Exception e) {

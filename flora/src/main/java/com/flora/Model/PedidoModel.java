@@ -47,19 +47,19 @@ public class PedidoModel {
         this.id = id;
     }
 
-    public ProdutoModel getproduto() {
+    public ProdutoModel getProduto() {
         return produto;
     }
 
-    public void setproduto(ProdutoModel produto) {
+    public void setProduto(ProdutoModel produto) {
         this.produto = produto;
     }
 
-    public ClienteModel getcliente() {
+    public ClienteModel getCliente() {
         return cliente;
     }
 
-    public void setcliente(ClienteModel cliente) {
+    public void setCliente(ClienteModel cliente) {
         this.cliente = cliente;
     }
 

@@ -48,8 +48,8 @@ public class PedidoService {
             }
             PedidoModel pedidoToUpdate = (PedidoModel) pedido.get();
 
-            pedidoToUpdate.setIdProduto(pedidoModel.getIdProduto());
-            pedidoToUpdate.setIdCliente(pedidoModel.getIdCliente());
+            pedidoToUpdate.setProduto(pedidoModel.getProduto());
+            pedidoToUpdate.setCliente(pedidoModel.getCliente());
             pedidoToUpdate.setDataPedido(pedidoModel.getDataPedido());
             pedidoToUpdate.setQntProduto(pedidoModel.getQntProduto());
             pedidoToUpdate.setFormaPgto(pedidoModel.getFormaPgto());
