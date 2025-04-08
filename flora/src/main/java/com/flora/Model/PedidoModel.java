@@ -11,8 +11,14 @@ public class PedidoModel {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pedido_seq")
     private Long id;
-    private Long idProduto;
-    private Long idCliente;
+    
+    @JoinColumn(name = "id_produto")
+    @ManyToOne
+    private ProdutoModel produto;
+
+    @JoinColumn(name = "id_cliente")
+    @ManyToOne
+    private ClienteModel cliente;
     private Date dataPedido;
     private int qntProduto;
     private String formaPgto;
@@ -20,10 +26,10 @@ public class PedidoModel {
     private double precoTotal;
 
 
-    public PedidoModel(Long id, Long idProduto, Long idCliente, Date dataPedido, int qntProduto, String formaPgto, Date dataPgto, double precoTotal) {
+    public PedidoModel(Long id, ProdutoModel produto, ClienteModel cliente, Date dataPedido, int qntProduto, String formaPgto, Date dataPgto, double precoTotal) {
         this.id = id;
-        this.idProduto = idProduto;
-        this.idCliente = idCliente;
+        this.produto = produto;
+        this.cliente = cliente;
         this.dataPedido = dataPedido;
         this.qntProduto = qntProduto;
         this.formaPgto = formaPgto;
@@ -41,20 +47,20 @@ public class PedidoModel {
         this.id = id;
     }
 
-    public Long getIdProduto() {
-        return idProduto;
+    public ProdutoModel getproduto() {
+        return produto;
     }
 
-    public void setIdProduto(Long idProduto) {
-        this.idProduto = idProduto;
+    public void setproduto(ProdutoModel produto) {
+        this.produto = produto;
     }
 
-    public Long getIdCliente() {
-        return idCliente;
+    public ClienteModel getcliente() {
+        return cliente;
     }
 
-    public void setIdCliente(Long idCliente) {
-        this.idCliente = idCliente;
+    public void setcliente(ClienteModel cliente) {
+        this.cliente = cliente;
     }
 
     public Date getDataPedido() {
@@ -101,8 +107,8 @@ public class PedidoModel {
     public String toString() {
         return "PedidoModel{" +
                 "id=" + id +
-                ", idProduto=" + idProduto +
-                ", idCliente=" + idCliente +
+                ", produto=" + produto +
+                ", cliente=" + cliente +
                 ", dataPedido=" + dataPedido +
                 ", qntProduto=" + qntProduto +
                 ", formaPgto='" + formaPgto + '\'' +
