@@ -30,6 +30,11 @@ public class EnderecoController {
         return enderecoService.getById(id);
     }
 
+    @GetMapping("/getAdressByClientId/{id}")
+    public ResponseEntity<Object> getOrderByIdCliente(@PathVariable Long id){
+        return enderecoService.getByIdCliente(id);
+    }
+
     @PutMapping("/updateAddress/{id}")
     public ResponseEntity<Object> updateAddress(@PathVariable Long id, @RequestBody EnderecoModel enderecoModel){
         return enderecoService.update(id, enderecoModel);

@@ -30,6 +30,12 @@ public class CartaoController {
         return cartaoService.getById(id);
     }
 
+    @GetMapping("/getOrderByClientId/{id}")
+    public ResponseEntity<Object> getOrderByIdCliente(@PathVariable Long id){
+        return cartaoService.getByIdCliente(id);
+    }
+
+
     @PutMapping("/updateCard/{id}")
     public ResponseEntity<Object> updateCard(@PathVariable Long id, @RequestBody CartaoModel cartaoModel){
         return cartaoService.update(id, cartaoModel);

@@ -30,7 +30,7 @@ public class ProdutoController {
         return produtoService.getById(id);
     }
 
-    @GetMapping("/getProductByCategory/{categoryId}")
+    @GetMapping("/getProductByCategory/{id}")
     public ResponseEntity<Object> getProductByCategory(@PathVariable int categoryId){
         return produtoService.getByIdCategoria(categoryId);
     }

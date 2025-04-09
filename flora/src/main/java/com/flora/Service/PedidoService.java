@@ -40,6 +40,30 @@ public class PedidoService {
         }
     }
 
+    public ResponseEntity<Object> getByIdCliente(Long idCliente){
+        try {
+            List<PedidoModel> pedido = pedidoRepository.findByClienteId(idCliente);
+            if (pedido.isEmpty()){
+                return ResponseEntity.badRequest().body("Esse pedido ainda não foi cadastrado.");
+            }
+            return ResponseEntity.ok(pedido);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Não foi possível buscaar o pedido. Exceção: " + e.getMessage());
+        }
+    }
+
+    public ResponseEntity<Object> getByIdProduto(Long idProduto){
+        try {
+            List<PedidoModel> pedido = pedidoRepository.findByClienteId(idProduto);
+            if (pedido.isEmpty()){
+                return ResponseEntity.badRequest().body("Esse pedido ainda não foi cadastrado.");
+            }
+            return ResponseEntity.ok(pedido);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Não foi possível buscaar o pedido. Exceção: " + e.getMessage());
+        }
+    }
+
     public ResponseEntity<Object> update(Long id, PedidoModel pedidoModel){
         try {
             Optional<PedidoModel> pedido = pedidoRepository.findById(id);

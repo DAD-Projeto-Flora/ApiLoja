@@ -40,6 +40,18 @@ public class CartaoService {
         }
     }
 
+    public ResponseEntity<Object> getByIdCliente(Long clienteId){
+        try {
+            List<CartaoModel> cartao = cartaoRepository.findByClienteId(clienteId);
+            if (cartao.isEmpty()){
+                return ResponseEntity.badRequest().body("Esse cartão ainda não foi cadastrado.");
+            }
+            return ResponseEntity.ok(cartao);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Não foi possível buscar o cartão. Exceção: " + e.getMessage());
+        }
+    }
+
     public ResponseEntity<Object> update(Long id, CartaoModel cartaoModel){
         try {
             Optional<CartaoModel> cartao = cartaoRepository.findById(id);

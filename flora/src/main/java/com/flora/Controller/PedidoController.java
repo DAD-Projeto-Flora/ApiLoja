@@ -30,6 +30,16 @@ public class PedidoController {
         return pedidoService.getById(id);
     }
 
+    @GetMapping("/getOrderByClientId/{id}")
+    public ResponseEntity<Object> getOrderByIdCliente(@PathVariable Long id){
+        return pedidoService.getByIdCliente(id);
+    }
+
+    @GetMapping("getOrderByProductId/{id}")
+    public ResponseEntity<Object> getOrderByProductId(@PathVariable Long id){
+        return pedidoService.getByIdProduto(id);
+    }
+
     @PutMapping("/updateOrder/{id}")
     public ResponseEntity<Object> updateOrder(@PathVariable Long id, @RequestBody PedidoModel pedidoModel){
         return pedidoService.update(id, pedidoModel);

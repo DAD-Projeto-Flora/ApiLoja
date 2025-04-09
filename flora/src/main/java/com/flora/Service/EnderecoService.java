@@ -40,6 +40,18 @@ public class EnderecoService {
         }
     }
 
+    public ResponseEntity<Object> getByIdCliente(Long idCliente){
+        try {
+            List<EnderecoModel> endereco = enderecoRepository.findByClienteId(idCliente);
+            if (endereco.isEmpty()){
+                return ResponseEntity.badRequest().body("Esse endereço ainda não foi cadastrado.");
+            }
+            return ResponseEntity.ok(endereco);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Não foi possível buscar o endereço. Exceção: " + e.getMessage());
+        }
+    }
+
     public ResponseEntity<Object> update(Long id, EnderecoModel enderecoModel){
         try {
             Optional<EnderecoModel> endereco = enderecoRepository.findById(id);
