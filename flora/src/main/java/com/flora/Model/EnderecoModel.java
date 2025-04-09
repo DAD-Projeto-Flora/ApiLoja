@@ -1,7 +1,6 @@
 package com.flora.Model;
 
 import jakarta.persistence.*;
-import org.springframework.data.annotation.Id;
 
 @Entity
 @Table(name = "endereco")
