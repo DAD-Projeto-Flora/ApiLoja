@@ -17,13 +17,16 @@ public class ProdutoModel {
     private CategoriaModel categoria;
 
     double notaAvaliacao;
+    private String urlImagem;
 
-    public ProdutoModel(int id, String nome, double precoUnid, CategoriaModel categoria, double notaAvaliacao) {
+
+    public ProdutoModel(int id, String nome, double precoUnid, CategoriaModel categoria, double notaAvaliacao, String urlImagem) {
         this.id = id;
         this.nome = nome;
         this.precoUnid = precoUnid;
         this.categoria = categoria;
         this.notaAvaliacao = notaAvaliacao;
+        this.urlImagem = urlImagem;
     }
 
     public ProdutoModel() {
@@ -67,5 +70,13 @@ public class ProdutoModel {
 
     public void setNotaAvaliacao(double notaAvaliacao) {
         this.notaAvaliacao = notaAvaliacao;
+    }
+
+    public String getUrlImagem() {
+        return urlImagem;
+    }
+
+    public void setUrlImagem(String urlImagem) {
+        this.urlImagem = urlImagem;
     }
 }

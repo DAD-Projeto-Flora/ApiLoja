@@ -64,6 +64,7 @@ public class ProdutoService {
             produtoToUpdate.setCategoria(produtoModel.getCategoria());
             produtoToUpdate.setNotaAvaliacao(produtoModel.getNotaAvaliacao());
             produtoToUpdate.setPrecoUnid(produtoModel.getPrecoUnid());
+            produtoToUpdate.setUrlImagem(produtoModel.getUrlImagem());
 
             produtoRepository.save(produtoToUpdate);
             return ResponseEntity.ok("Produto atualizado com sucesso!");
