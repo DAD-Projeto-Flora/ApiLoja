@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -61,28 +62,6 @@ public class PedidoService {
             return ResponseEntity.ok(pedido);
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body("Não foi possível buscaar o pedido. Exceção: " + e.getMessage());
-        }
-    }
-
-    public ResponseEntity<Object> update(Long id, PedidoModel pedidoModel){
-        try {
-            Optional<PedidoModel> pedido = pedidoRepository.findById(id);
-            if (pedido.isEmpty()) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pedido não encontrado");
-            }
-            PedidoModel pedidoToUpdate = (PedidoModel) pedido.get();
-
-            pedidoToUpdate.setProduto(pedidoModel.getProduto());
-            pedidoToUpdate.setCliente(pedidoModel.getCliente());
-            pedidoToUpdate.setDataPedido(pedidoModel.getDataPedido());
-            pedidoToUpdate.setQntProduto(pedidoModel.getQntProduto());
-            pedidoToUpdate.setFormaPgto(pedidoModel.getFormaPgto());
-            pedidoToUpdate.setPrecoTotal(pedidoModel.getPrecoTotal());
-
-            pedidoRepository.save(pedidoToUpdate);
-            return ResponseEntity.ok("Pedido atualizado com sucesso!");
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError().body("Não foi possível atualizar o pedido.");
         }
     }
 

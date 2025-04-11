@@ -7,9 +7,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/client")
+@CrossOrigin("*")
 public class ClienteController {
 
     @Autowired
@@ -32,9 +34,15 @@ public class ClienteController {
 
 
     @PutMapping("/updateClient/{id}")
-    public ResponseEntity<Object> updateClient(@PathVariable Long id, @RequestBody ClienteModel clienteModel){
+    public ResponseEntity<String> updateClient(@PathVariable Long id, @RequestBody ClienteModel clienteModel){
         return clienteService.update(id, clienteModel);
     }
+
+    @PatchMapping("/partialUpdateClient/{id}")
+    public ResponseEntity<String> partialUpdateClient(@PathVariable Long id, @RequestBody Map<Object, Object> updates){
+        return clienteService.partialUpdate(id, updates);
+    }
+
     @DeleteMapping("/deleteClient/{id}")
     public ResponseEntity<Object> deleteClient(@PathVariable Long id){
         return clienteService.delete(id);

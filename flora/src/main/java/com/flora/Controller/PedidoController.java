@@ -40,10 +40,6 @@ public class PedidoController {
         return pedidoService.getByIdProduto(id);
     }
 
-    @PutMapping("/updateOrder/{id}")
-    public ResponseEntity<Object> updateOrder(@PathVariable Long id, @RequestBody PedidoModel pedidoModel){
-        return pedidoService.update(id, pedidoModel);
-    }
     @DeleteMapping("/deleteOrder/{id}")
     public ResponseEntity<Object> deleteOrder(@PathVariable Long id){
         return pedidoService.delete(id);

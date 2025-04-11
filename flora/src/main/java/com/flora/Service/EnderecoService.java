@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -59,18 +60,44 @@ public class EnderecoService {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Endereço não encontrado");
             }
             EnderecoModel enderecoToUpdate = (EnderecoModel) endereco.get();
-            enderecoToUpdate.setCliente(enderecoModel.getCliente());
-            enderecoToUpdate.setCep(enderecoModel.getCep());
-            enderecoToUpdate.setNumero(enderecoModel.getNumero());
-            enderecoToUpdate.setLogradouro(enderecoModel.getLogradouro());
-            enderecoToUpdate.setBairro(enderecoModel.getBairro());
-            enderecoToUpdate.setCidade(enderecoModel.getCidade());
-            enderecoToUpdate.setEstado(enderecoModel.getEstado());
-            enderecoToUpdate.setPontoReferencia(enderecoModel.getPontoReferencia());
-
-            
-            enderecoRepository.save(enderecoToUpdate);
+            enderecoRepository.save(updateEndereco(enderecoModel, enderecoToUpdate));
             return ResponseEntity.ok("Endereço atualizado com sucesso!");
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Não foi possível atualizar o endereço.");
+        }
+    }
+
+    public ResponseEntity<String> partialUpdate(Long id, Map<Object, Object> updates) {
+        try {
+            Optional<EnderecoModel> enderecoOptional = enderecoRepository.findById(id);
+
+            if (enderecoOptional.isPresent()) {
+                EnderecoModel enderecoToUpdate = enderecoOptional.get();
+                if (updates.containsKey("cep")) {
+                    enderecoToUpdate.setCep(updates.get("cep").toString());
+                }
+                if (updates.containsKey("numero")) {
+                    enderecoToUpdate.setCep(updates.get("numero").toString());
+                }
+                if (updates.containsKey("logradouro")) {
+                    enderecoToUpdate.setCep(updates.get("logradouro").toString());
+                }
+                if (updates.containsKey("bairro")) {
+                    enderecoToUpdate.setCep(updates.get("bairro").toString());
+                }
+                if (updates.containsKey("cidade")) {
+                    enderecoToUpdate.setCep(updates.get("cidade").toString());
+                }
+                if (updates.containsKey("estado")) {
+                    enderecoToUpdate.setCep(updates.get("estado").toString());
+                }
+                if (updates.containsKey("pontoReferencia")) {
+                    enderecoToUpdate.setCep(updates.get("pontoReferencia").toString());
+                }
+                enderecoRepository.save(enderecoToUpdate);
+                return ResponseEntity.ok("Endereço atualizado com sucesso!");
+            }
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Endereço não encontrado");
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body("Não foi possível atualizar o endereço.");
         }
@@ -83,5 +110,18 @@ public class EnderecoService {
         }
         enderecoRepository.deleteById(id);
         return ResponseEntity.ok("Endereço deletado com sucesso!");
+    }
+
+    public EnderecoModel updateEndereco(EnderecoModel enderecoModel, EnderecoModel enderecoToUpdate){
+        enderecoToUpdate.setCliente(enderecoModel.getCliente());
+        enderecoToUpdate.setCep(enderecoModel.getCep());
+        enderecoToUpdate.setNumero(enderecoModel.getNumero());
+        enderecoToUpdate.setLogradouro(enderecoModel.getLogradouro());
+        enderecoToUpdate.setBairro(enderecoModel.getBairro());
+        enderecoToUpdate.setCidade(enderecoModel.getCidade());
+        enderecoToUpdate.setEstado(enderecoModel.getEstado());
+        enderecoToUpdate.setPontoReferencia(enderecoModel.getPontoReferencia());
+
+        return enderecoToUpdate;
     }
 }

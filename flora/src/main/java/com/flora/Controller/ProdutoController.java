@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/product")
@@ -33,6 +34,11 @@ public class ProdutoController {
     @GetMapping("/getProductByCategory/{id}")
     public ResponseEntity<Object> getProductByCategory(@PathVariable int categoryId){
         return produtoService.getByIdCategoria(categoryId);
+    }
+
+    @PatchMapping("/partialUpdateProduct/{id}")
+    public ResponseEntity<String> partialUpdateProduct(@PathVariable Long id, @RequestBody Map<Object, Object> updates){
+        return produtoService.partialUpdate(id, updates);
     }
 
     @PutMapping("/updateProduct/{id}")

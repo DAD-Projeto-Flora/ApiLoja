@@ -2,13 +2,13 @@ package com.flora.Service;
 
 import com.flora.Model.CategoriaModel;
 import com.flora.Repository.CategoriaRepository;
-import com.flora.Repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -58,12 +58,34 @@ public class CategoriaService {
         }
     }
 
-    public ResponseEntity<Object> delete(Long id) {
-        Optional<CategoriaModel> categoria = categoriaRepository.findById(id);
-        if (categoria.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Categoria não encontrada");
+    public ResponseEntity<String> partialUpdate(Long id, Map<Object, Object> updates) {
+        try {
+            Optional<CategoriaModel> categoriaOptional = categoriaRepository.findById(id);
+
+            if (categoriaOptional.isPresent()) {
+                CategoriaModel categoriaToUpdate = categoriaOptional.get();
+                if (updates.containsKey("nome")) {
+                    categoriaToUpdate.setNome(updates.get("nome").toString());
+                }
+                categoriaRepository.save(categoriaToUpdate);
+                return ResponseEntity.ok("Categoria atualizado com sucesso!");
+            }
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Categoria não encontrado");
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Não foi possível atualizar a categoria.");
         }
-        categoriaRepository.deleteById(id);
-        return ResponseEntity.ok("Categoria deletada com sucesso!");
+    }
+
+    public ResponseEntity<Object> delete(Long id) {
+        try {
+            Optional<CategoriaModel> categoria = categoriaRepository.findById(id);
+            if (categoria.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Categoria não encontrada");
+            }
+            categoriaRepository.deleteById(id);
+            return ResponseEntity.ok("Categoria deletada com sucesso!");
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Não foi possível deletar a categoria.");
+        }
     }
 }

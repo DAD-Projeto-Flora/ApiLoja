@@ -7,9 +7,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/category")
+@CrossOrigin("*")
 public class CategoriaController {
 
     @Autowired
@@ -34,6 +36,12 @@ public class CategoriaController {
     public ResponseEntity<Object> updateCategory(@PathVariable Long id, @RequestBody CategoriaModel categoriaModel){
         return categoriaService.update(id, categoriaModel);
     }
+
+    @PatchMapping("/partialUpdateCategory/{id}")
+    public ResponseEntity<String> partialUpdateClient(@PathVariable Long id, @RequestBody Map<Object, Object> updates){
+        return categoriaService.partialUpdate(id, updates);
+    }
+
     @DeleteMapping("/deleteCategory/{id}")
     public ResponseEntity<Object> deleteCategory(@PathVariable Long id){
         return categoriaService.delete(id);

@@ -7,9 +7,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/address")
+@CrossOrigin("*")
 public class EnderecoController {
 
     @Autowired
@@ -39,6 +41,12 @@ public class EnderecoController {
     public ResponseEntity<Object> updateAddress(@PathVariable Long id, @RequestBody EnderecoModel enderecoModel){
         return enderecoService.update(id, enderecoModel);
     }
+
+    @PatchMapping("/partialUpdateAdress/{id}")
+    public ResponseEntity<String> partialUpdateEndereco(@PathVariable Long id, @RequestBody Map<Object, Object> updates){
+        return enderecoService.partialUpdate(id, updates);
+    }
+
     @DeleteMapping("/deleteAddress/{id}")
     public ResponseEntity<Object> deleteAddress(@PathVariable Long id){
         return enderecoService.delete(id);

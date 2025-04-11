@@ -7,9 +7,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/card")
+@CrossOrigin("*")
 public class CartaoController {
 
     @Autowired
@@ -35,11 +37,16 @@ public class CartaoController {
         return cartaoService.getByIdCliente(id);
     }
 
-
     @PutMapping("/updateCard/{id}")
     public ResponseEntity<Object> updateCard(@PathVariable Long id, @RequestBody CartaoModel cartaoModel){
         return cartaoService.update(id, cartaoModel);
     }
+
+    @PatchMapping("/partialUpdateCard/{id}")
+    public ResponseEntity<String> partialUpdateCard(@PathVariable Long id, @RequestBody Map<Object, Object> updates){
+        return cartaoService.partialUpdate(id, updates);
+    }
+
     @DeleteMapping("/deleteCard/{id}")
     public ResponseEntity<Object> deleteCard(@PathVariable Long id){
         return cartaoService.delete(id);

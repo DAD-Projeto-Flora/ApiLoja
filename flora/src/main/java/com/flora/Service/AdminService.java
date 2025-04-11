@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -40,7 +41,7 @@ public class AdminService {
         }
     }
 
-    public ResponseEntity<Object> update(int id, AdminModel adminModel){
+    public ResponseEntity<String> update(int id, AdminModel adminModel){
         try {
             Optional<AdminModel> admin = adminRepository.findById(id);
             if (admin.isEmpty()) {
@@ -49,6 +50,8 @@ public class AdminService {
             AdminModel adminToUpdate = (AdminModel) admin.get();
 
             adminToUpdate.setNome(adminModel.getNome());
+            adminToUpdate.setEmail(adminModel.getEmail());
+            adminToUpdate.setSenha(adminModel.getSenha());
 
             adminRepository.save(adminToUpdate);
             return ResponseEntity.ok("Admin atualizado com sucesso!");
@@ -57,12 +60,45 @@ public class AdminService {
         }
     }
 
-    public ResponseEntity<Object> delete(int id) {
-        Optional<AdminModel> admin = adminRepository.findById(id);
-        if (admin.isEmpty()) {
+    public ResponseEntity<String> partialUpdate(int id, Map<Object, Object> updates) {
+        try {
+            Optional<AdminModel> adminOptional = adminRepository.findById(id);
+
+            if (adminOptional.isPresent()) {
+                AdminModel adminToUpdate = adminOptional.get();
+
+                if (updates.containsKey("nome")) {
+                    adminToUpdate.setNome(updates.get("nome").toString());
+                }
+                if (updates.containsKey("senha")) {
+                    adminToUpdate.setSenha(updates.get("senha").toString());
+                }
+                if (updates.containsKey("email")) {
+                    adminToUpdate.setEmail(updates.get("email").toString());
+                }
+
+                adminRepository.save(adminToUpdate);
+
+                return ResponseEntity.ok("Admin atualizado com sucesso!");
+            }
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Admin não encontrado");
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Não foi possível atualizar o admin.");
         }
-        adminRepository.deleteById(id);
-        return ResponseEntity.ok("Admin deletado com sucesso!");
+    }
+
+
+    public ResponseEntity<Object> delete(int id) {
+        try {
+            Optional<AdminModel> admin = adminRepository.findById(id);
+            if (admin.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Admin não encontrado");
+            }
+            adminRepository.deleteById(id);
+            return ResponseEntity.ok("Admin deletado com sucesso!");
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Não foi possível atualizar o admin.");
+
+        }
     }
 }

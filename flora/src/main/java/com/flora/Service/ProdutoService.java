@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -68,6 +69,36 @@ public class ProdutoService {
 
             produtoRepository.save(produtoToUpdate);
             return ResponseEntity.ok("Produto atualizado com sucesso!");
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Não foi possível atualizar o produto.");
+        }
+    }
+
+    public ResponseEntity<String> partialUpdate(Long id, Map<Object, Object> updates) {
+        try {
+            Optional<ProdutoModel> produtoOptional = produtoRepository.findById(id);
+
+            if (produtoOptional.isPresent()) {
+                ProdutoModel produtoToUpdate = produtoOptional.get();
+                if (updates.containsKey("nome")) {
+                    produtoToUpdate.setNome(updates.get("nome").toString());
+                }
+                if (updates.containsKey("categoria")) {
+                    produtoToUpdate.setNome(updates.get("categoria").toString());
+                }
+                if (updates.containsKey("notaAvaliacao")) {
+                    produtoToUpdate.setNome(updates.get("notaAvaliacao").toString());
+                }
+                if (updates.containsKey("precoUnid")) {
+                    produtoToUpdate.setNome(updates.get("precoUnid").toString());
+                }
+                if (updates.containsKey("urlImagem")) {
+                    produtoToUpdate.setNome(updates.get("urlImagem").toString());
+                }
+                produtoRepository.save(produtoToUpdate);
+                return ResponseEntity.ok("Produto atualizado com sucesso!");
+            }
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produto não encontrado");
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body("Não foi possível atualizar o produto.");
         }

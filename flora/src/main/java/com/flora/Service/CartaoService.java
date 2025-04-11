@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -40,9 +41,9 @@ public class CartaoService {
         }
     }
 
-    public ResponseEntity<Object> getByIdCliente(Long clienteId){
+    public ResponseEntity<Object> getByIdCliente(Long cartaoId){
         try {
-            List<CartaoModel> cartao = cartaoRepository.findByClienteId(clienteId);
+            List<CartaoModel> cartao = cartaoRepository.findByClienteId(cartaoId);
             if (cartao.isEmpty()){
                 return ResponseEntity.badRequest().body("Esse cartão ainda não foi cadastrado.");
             }
@@ -74,12 +75,35 @@ public class CartaoService {
         }
     }
 
-    public ResponseEntity<Object> delete(Long id) {
-        Optional<CartaoModel> cartao = cartaoRepository.findById(id);
-        if (cartao.isEmpty()) {
+    public ResponseEntity<String> partialUpdate(Long id, Map<Object, Object> updates) {
+        try {
+            Optional<CartaoModel> cartaoOptional = cartaoRepository.findById(id);
+
+            if (cartaoOptional.isPresent()) {
+                CartaoModel cartaoToUpdate = cartaoOptional.get();
+                if (updates.containsKey("apelidoCartao")) {
+                    cartaoToUpdate.setApelidoCartao(updates.get("apelidoCartao").toString());
+                }
+                cartaoRepository.save(cartaoToUpdate);
+                return ResponseEntity.ok("Cartão atualizado com sucesso!");
+            }
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cartão não encontrado");
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Não foi possível atualizar o cartão.");
         }
-        cartaoRepository.deleteById(id);
-        return ResponseEntity.ok("Cartão deletado com sucesso!");
+    }
+
+
+    public ResponseEntity<Object> delete(Long id) {
+        try {
+            Optional<CartaoModel> cartao = cartaoRepository.findById(id);
+            if (cartao.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cartão não encontrado");
+            }
+            cartaoRepository.deleteById(id);
+            return ResponseEntity.ok("Cartão deletado com sucesso!");
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Não foi possível deletar o cartão.");
+        }
     }
 }
