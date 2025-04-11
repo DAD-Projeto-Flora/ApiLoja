@@ -55,6 +55,7 @@ public class ClienteService {
             clienteToUpdate.setEmail(clienteModel.getEmail());
             clienteToUpdate.setFotoPerfil(clienteModel.getFotoPerfil());
             clienteToUpdate.setNomeUsuario(clienteModel.getNomeUsuario());
+            clienteToUpdate.setGenero(clienteModel.getGenero());
             clienteToUpdate.setTelefone(clienteModel.getTelefone());
             clienteToUpdate.setSenha(clienteModel.getSenha());
 
@@ -83,6 +84,9 @@ public class ClienteService {
                 }
                 if (updates.containsKey("senha")) {
                     clienteToUpdate.setSenha(updates.get("senha").toString());
+                }
+                if (updates.containsKey("genero")) {
+                    clienteToUpdate.setGenero(updates.get("genero").toString());
                 }
                 if (updates.containsKey("fotoPerfil")) {
                     clienteToUpdate.setFotoPerfil(updates.get("fotoPerfil").toString());

@@ -13,20 +13,25 @@ public class ClienteModel {
     String email;
     String nomeUsuario;
     String fotoPerfil;
+    String cpf;
+    String genero;
     String senha;
     String telefone;
 
-    public ClienteModel(Long id, String nomeCompleto, String email, String nomeUsuario, String fotoPerfil, String senha, String telefone) {
+    public ClienteModel(Long id, String nomeCompleto, String email, String nomeUsuario, String fotoPerfil, String cpf, String genero, String senha, String telefone) {
         this.id = id;
         this.nomeCompleto = nomeCompleto;
         this.email = email;
         this.nomeUsuario = nomeUsuario;
         this.fotoPerfil = fotoPerfil;
+        this.cpf = cpf;
+        this.genero = genero;
         this.senha = senha;
         this.telefone = telefone;
     }
 
-    public ClienteModel() {}
+    public ClienteModel() {
+    }
 
     public Long getId() {
         return id;
@@ -68,6 +73,22 @@ public class ClienteModel {
         this.fotoPerfil = fotoPerfil;
     }
 
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
     public String getSenha() {
         return senha;
     }
@@ -83,6 +104,5 @@ public class ClienteModel {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
-
 }
 
