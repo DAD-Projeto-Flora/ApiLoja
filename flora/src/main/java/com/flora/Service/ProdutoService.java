@@ -1,5 +1,6 @@
 package com.flora.Service;
 
+import com.flora.Model.CategoriaModel;
 import com.flora.Model.ProdutoModel;
 import com.flora.Repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,16 +85,18 @@ public class ProdutoService {
                     produtoToUpdate.setNome(updates.get("nome").toString());
                 }
                 if (updates.containsKey("categoria")) {
-                    produtoToUpdate.setNome(updates.get("categoria").toString());
+                    CategoriaModel categoria = new CategoriaModel();
+                    categoria.setId(Integer.parseInt(updates.get("categoria").toString()));
+                    produtoToUpdate.setCategoria(categoria);
                 }
                 if (updates.containsKey("notaAvaliacao")) {
-                    produtoToUpdate.setNome(updates.get("notaAvaliacao").toString());
+                    produtoToUpdate.setNotaAvaliacao(Double.parseDouble(updates.get("notaAvaliacao").toString()));
                 }
                 if (updates.containsKey("precoUnid")) {
-                    produtoToUpdate.setNome(updates.get("precoUnid").toString());
+                    produtoToUpdate.setPrecoUnid(Double.parseDouble(updates.get("precoUnid").toString()));
                 }
                 if (updates.containsKey("urlImagem")) {
-                    produtoToUpdate.setNome(updates.get("urlImagem").toString());
+                    produtoToUpdate.setUrlImagem(updates.get("urlImagem").toString());
                 }
                 produtoRepository.save(produtoToUpdate);
                 return ResponseEntity.ok("Produto atualizado com sucesso!");
