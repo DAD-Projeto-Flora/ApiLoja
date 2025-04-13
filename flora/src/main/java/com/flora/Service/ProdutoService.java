@@ -37,7 +37,7 @@ public class ProdutoService {
             }
             return ResponseEntity.ok(produto.get());
         } catch (Exception e) {
-            return ResponseEntity.internalServerError().body("Não foi possível buscaar o produto. Exceção: " + e.getMessage());
+            return ResponseEntity.internalServerError().body("Não foi possível buscar o produto. Exceção: " + e.getMessage());
         }
     }
 
