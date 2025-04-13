@@ -33,8 +33,8 @@ public class ProdutoController {
     }
 
     @GetMapping("/getProductByCategory/{id}")
-    public ResponseEntity<Object> getProductByCategory(@PathVariable int categoryId){
-        return produtoService.getByIdCategoria(categoryId);
+    public ResponseEntity<Object> getProductByCategory(@PathVariable int id){
+        return produtoService.getByIdCategoria(id);
     }
 
     @PatchMapping("/partialUpdateProduct/{id}")
