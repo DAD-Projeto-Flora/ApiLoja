@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "https://site-loja-flora.vercel.app")
 @RestController
 @RequestMapping("/order")
 public class PedidoController {
