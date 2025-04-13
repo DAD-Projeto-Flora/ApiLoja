@@ -58,23 +58,7 @@ public class CategoriaService {
         }
     }
 
-    public ResponseEntity<String> partialUpdate(Long id, Map<Object, Object> updates) {
-        try {
-            Optional<CategoriaModel> categoriaOptional = categoriaRepository.findById(id);
 
-            if (categoriaOptional.isPresent()) {
-                CategoriaModel categoriaToUpdate = categoriaOptional.get();
-                if (updates.containsKey("nome")) {
-                    categoriaToUpdate.setNome(updates.get("nome").toString());
-                }
-                categoriaRepository.save(categoriaToUpdate);
-                return ResponseEntity.ok("Categoria atualizado com sucesso!");
-            }
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Categoria não encontrado");
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError().body("Não foi possível atualizar a categoria.");
-        }
-    }
 
     public ResponseEntity<Object> delete(Long id) {
         try {

@@ -73,27 +73,29 @@ public class EnderecoService {
 
             if (enderecoOptional.isPresent()) {
                 EnderecoModel enderecoToUpdate = enderecoOptional.get();
+
                 if (updates.containsKey("cep")) {
                     enderecoToUpdate.setCep(updates.get("cep").toString());
                 }
                 if (updates.containsKey("numero")) {
-                    enderecoToUpdate.setCep(updates.get("numero").toString());
+                    enderecoToUpdate.setNumero(updates.get("numero").toString());
                 }
                 if (updates.containsKey("logradouro")) {
-                    enderecoToUpdate.setCep(updates.get("logradouro").toString());
+                    enderecoToUpdate.setLogradouro(updates.get("logradouro").toString());
                 }
                 if (updates.containsKey("bairro")) {
-                    enderecoToUpdate.setCep(updates.get("bairro").toString());
+                    enderecoToUpdate.setBairro(updates.get("bairro").toString());
                 }
                 if (updates.containsKey("cidade")) {
-                    enderecoToUpdate.setCep(updates.get("cidade").toString());
+                    enderecoToUpdate.setCidade(updates.get("cidade").toString());
                 }
                 if (updates.containsKey("estado")) {
-                    enderecoToUpdate.setCep(updates.get("estado").toString());
+                    enderecoToUpdate.setEstado(updates.get("estado").toString());
                 }
                 if (updates.containsKey("pontoReferencia")) {
-                    enderecoToUpdate.setCep(updates.get("pontoReferencia").toString());
+                    enderecoToUpdate.setPontoReferencia(updates.get("pontoReferencia").toString());
                 }
+
                 enderecoRepository.save(enderecoToUpdate);
                 return ResponseEntity.ok("Endereço atualizado com sucesso!");
             }

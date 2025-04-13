@@ -37,11 +37,6 @@ public class CategoriaController {
         return categoriaService.update(id, categoriaModel);
     }
 
-    @PatchMapping("/partialUpdateCategory/{id}")
-    public ResponseEntity<String> partialUpdateClient(@PathVariable Long id, @RequestBody Map<Object, Object> updates){
-        return categoriaService.partialUpdate(id, updates);
-    }
-
     @DeleteMapping("/deleteCategory/{id}")
     public ResponseEntity<Object> deleteCategory(@PathVariable Long id){
         return categoriaService.delete(id);
